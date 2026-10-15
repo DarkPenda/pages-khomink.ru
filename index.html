@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Мой тестовый сайт</title>
+  <meta name="description" content="Тестовая страница на GitHub Pages">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      font-family: system-ui, sans-serif;
+      color: #f8fafc;
+      background: linear-gradient(135deg, #101827, #173c68);
+    }
+
+    main {
+      width: 100%;
+      max-width: 600px;
+      padding: 40px;
+      border: 1px solid #45617f;
+      border-radius: 24px;
+      background: #17263a;
+      box-shadow: 0 24px 70px #0005;
+    }
+
+    .status { color: #6ee7b7; }
+    h1 { font-size: clamp(30px, 6vw, 46px); }
+    p { line-height: 1.7; color: #cbd5e1; }
+
+    button {
+      padding: 13px 20px;
+      border: 0;
+      border-radius: 10px;
+      background: #38bdf8;
+      color: #082032;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover { background: #7dd3fc; }
+    code { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="status">● Сайт загружен</p>
+    <h1>Привет! 👋</h1>
+    <p>Это моя тестовая страница на GitHub Pages.</p>
+    <p>Время на устройстве: <strong id="clock"></strong></p>
+    <button id="test">Проверить JavaScript</button>
+    <p id="result">Ожидание проверки...</p>
+    <p>Адрес сайта: <code id="url"></code></p>
+    <p>Протокол: <strong id="protocol"></strong></p>
+  </main>
+
+  <script>
+    function updateClock() {
+      document.getElementById("clock").textContent =
+        new Date().toLocaleString("ru-RU");
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    document.getElementById("url").textContent =
+      window.location.host || "Локальный файл";
+
+    document.getElementById("protocol").textContent =
+      window.location.protocol === "https:"
+        ? "HTTPS — защищённое соединение 🔒"
+        : "HTTP или локальный файл";
+
+    document.getElementById("test").addEventListener("click", () => {
+      document.getElementById("result").textContent =
+        "JavaScript работает! Всё отлично ✅";
+    });
+  </script>
+</body>
+</html>
