@@ -1,86 +1,1333 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Мой тестовый сайт</title>
-  <meta name="description" content="Тестовая страница на GitHub Pages">
-  <style>
-    * { box-sizing: border-box; }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>khomink</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ── сброс и база ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      font-family: system-ui, sans-serif;
-      color: #f8fafc;
-      background: linear-gradient(135deg, #101827, #173c68);
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    main {
-      width: 100%;
-      max-width: 600px;
-      padding: 40px;
-      border: 1px solid #45617f;
-      border-radius: 24px;
-      background: #17263a;
-      box-shadow: 0 24px 70px #0005;
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0c0c0c;
+            color: #f0f0f0;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
 
-    .status { color: #6ee7b7; }
-    h1 { font-size: clamp(30px, 6vw, 46px); }
-    p { line-height: 1.7; color: #cbd5e1; }
+        a, button {
+            font-family: inherit;
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+        }
 
-    button {
-      padding: 13px 20px;
-      border: 0;
-      border-radius: 10px;
-      background: #38bdf8;
-      color: #082032;
-      font-weight: 700;
-      cursor: pointer;
-    }
+        /* ── ШАПКА ── */
+        .navbar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(12, 12, 12, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            z-index: 999;
+        }
 
-    button:hover { background: #7dd3fc; }
-    code { overflow-wrap: anywhere; }
-  </style>
+        .navbar .logo {
+            font-family: 'Nunito', 'Inter', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: -0.3px;
+            color: #ffffff;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .navbar .beta-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #777;
+            text-transform: uppercase;
+            margin-top: 0.35rem;
+            text-align: center;
+        }
+
+        /* ── СОЦСЕТИ ── */
+        .info-block {
+            padding: 3rem 5% 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .info-block .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .info-block .social-links .social-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            padding: 0.9rem 1.3rem;
+            background: #131313;
+            border-radius: 14px;
+            min-width: 240px;
+            overflow: hidden;
+            isolation: isolate;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .info-block .social-links .social-item::before {
+            content: '';
+            position: absolute;
+            inset: -200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                transparent 300deg,
+                #d97761 330deg,
+                #cc5863 345deg,
+                #b83a6b 355deg,
+                #992476 360deg
+            );
+            animation: snakeSpin 4s linear infinite;
+            z-index: -2;
+        }
+
+        .info-block .social-links .social-item::after {
+            content: '';
+            position: absolute;
+            inset: 1.5px;
+            background: #131313;
+            border-radius: 12.5px;
+            z-index: -1;
+            transition: background 0.25s ease;
+        }
+
+        @keyframes snakeSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        .info-block .social-links .social-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(217, 119, 97, 0.18);
+        }
+
+        .info-block .social-links .social-item:hover::after {
+            background: #181818;
+        }
+
+        .info-block .social-links .social-item .social-icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: #1c1c1c;
+            border: 1px solid #2a2a2a;
+            transition: all 0.25s ease;
+        }
+
+        .info-block .social-links .social-item .social-icon i {
+            font-size: 1.1rem;
+            color: #e8e8e8;
+            transition: color 0.25s ease;
+        }
+
+        .info-block .social-links .social-item:hover .social-icon {
+            background: #232323;
+            border-color: #3a3a3a;
+        }
+
+        .info-block .social-links .social-item:hover .social-icon i {
+            color: #ffffff;
+        }
+
+        .info-block .social-links .social-item .social-text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .info-block .social-links .social-item .social-name {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: #f0f0f0;
+            line-height: 1.3;
+        }
+
+        .info-block .social-links .social-item .social-desc {
+            font-size: 0.75rem;
+            color: #888;
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ── ЗАГОЛОВКИ РАЗДЕЛОВ ── */
+        .section-head {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 2.5rem 5% 0.5rem;
+            text-align: left;
+        }
+
+        .section-head .section-title {
+            font-family: 'Nunito', 'Inter', sans-serif;
+            font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            color: #ffffff;
+            margin-bottom: 0.4rem;
+        }
+
+        .section-head .section-desc {
+            font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+            color: #888;
+            line-height: 1.6;
+            max-width: 620px;
+        }
+
+        /* ── СВОРАЧИВАЕМЫЙ ЗАГОЛОВОК ── */
+        .section-head.collapsible {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            transition: opacity 0.2s ease;
+        }
+
+        .section-head.collapsible:hover .section-title {
+            opacity: 0.85;
+        }
+
+        .section-head .head-row {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .section-head .toggle-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: #999;
+            background: #181818;
+            border: 1px solid #2a2a2a;
+            padding: 0.35rem 0.9rem;
+            border-radius: 30px;
+            transition: all 0.25s ease;
+            margin-left: 0.3rem;
+        }
+
+        .section-head .toggle-btn i {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+
+        .section-head.collapsible:hover .toggle-btn {
+            color: #fff;
+            border-color: #3a3a3a;
+            background: #1e1e1e;
+        }
+
+        .section-head.open .toggle-btn i {
+            transform: rotate(180deg);
+        }
+
+        /* ── СВОРАЧИВАЕМЫЕ СЕКЦИИ (общее) ── */
+        .collapsible-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 5%;
+            background: #0a0a0a;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        opacity 0.4s ease,
+                        padding 0.4s ease;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .collapsible-section.open {
+            max-height: 1400px;
+            opacity: 1;
+            padding: 1.2rem 5% 1rem;
+        }
+
+        /* ── GITHUB РЕПОЗИТОРИИ ── */
+        .repos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+        }
+
+        .repo-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding: 1.4rem 1.4rem 1.2rem;
+            background: #131313;
+            border: 1px solid #222;
+            border-radius: 16px;
+            transition: all 0.25s ease;
+            overflow: hidden;
+            isolation: isolate;
+            min-height: 220px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: repoAppear 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .collapsible-section:not(.open) .repo-card {
+            animation: none;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes repoAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .repo-card::before {
+            content: '';
+            position: absolute;
+            inset: -200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                transparent 320deg,
+                #d97761 340deg,
+                #b83a6b 355deg,
+                #992476 360deg
+            );
+            animation: snakeSpin 6s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -2;
+        }
+
+        .repo-card::after {
+            content: '';
+            position: absolute;
+            inset: 1.5px;
+            background: #131313;
+            border-radius: 14.5px;
+            z-index: -1;
+            transition: background 0.25s ease;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .repo-card:hover::before {
+            opacity: 1;
+        }
+
+        .repo-card:hover::after {
+            background: #171717;
+        }
+
+        .repo-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+        }
+
+        .repo-name-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            min-width: 0;
+        }
+
+        .repo-name-wrap .repo-icon {
+            flex-shrink: 0;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            background: #1c1c1c;
+            border: 1px solid #2a2a2a;
+        }
+
+        .repo-name-wrap .repo-icon i {
+            font-size: 0.95rem;
+            color: #d0d0d0;
+        }
+
+        .repo-name-wrap .repo-name {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: #f0f0f0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .repo-name-wrap .repo-name.empty {
+            color: #3a3a3a;
+        }
+
+        .repo-visibility {
+            flex-shrink: 0;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #888;
+            background: #1e1e1e;
+            border: 1px solid #2c2c2c;
+            padding: 0.15rem 0.55rem;
+            border-radius: 20px;
+        }
+
+        .repo-desc {
+            font-size: 0.84rem;
+            color: #999;
+            line-height: 1.5;
+            min-height: 2.6em;
+        }
+
+        .repo-desc.empty {
+            color: #333;
+        }
+
+        .repo-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.75rem;
+            color: #777;
+            margin-top: 0.2rem;
+        }
+
+        .repo-meta .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .repo-meta .meta-item i {
+            font-size: 0.75rem;
+            color: #666;
+        }
+
+        .repo-meta .meta-item.empty {
+            color: #333;
+        }
+
+        .repo-meta .meta-item.empty i {
+            color: #333;
+        }
+
+        .lang-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #2a2a2a;
+        }
+
+        .repo-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.8rem;
+            margin-top: auto;
+            padding-top: 0.8rem;
+            border-top: 1px solid #1e1e1e;
+        }
+
+        .repo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #ccc;
+            transition: color 0.2s ease;
+        }
+
+        .repo-link i {
+            font-size: 0.8rem;
+            transition: transform 0.25s ease;
+        }
+
+        .repo-link:hover {
+            color: #fff;
+        }
+
+        .repo-link:hover i {
+            transform: translateX(3px);
+        }
+
+        .repo-updated {
+            font-size: 0.7rem;
+            color: #555;
+        }
+
+        .repo-updated.empty {
+            color: #333;
+        }
+
+        /* ── ПАРТНЁРЫ ── */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+        }
+
+        .partner-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: #131313;
+            border: 1px solid #222;
+            border-radius: 16px;
+            overflow: hidden;
+            isolation: isolate;
+            transition: all 0.25s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: repoAppear 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .collapsible-section:not(.open) .partner-card {
+            animation: none;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            inset: -200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                transparent 320deg,
+                #d97761 340deg,
+                #b83a6b 355deg,
+                #992476 360deg
+            );
+            animation: snakeSpin 6s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -2;
+        }
+
+        .partner-card::after {
+            content: '';
+            position: absolute;
+            inset: 1.5px;
+            background: #131313;
+            border-radius: 14.5px;
+            z-index: -1;
+            transition: background 0.25s ease;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        .partner-card:hover::before {
+            opacity: 1;
+        }
+
+        .partner-card:hover::after {
+            background: #171717;
+        }
+
+        .partner-img {
+            width: 100%;
+            aspect-ratio: 16/10;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #1e1e1e;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .partner-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .partner-img .partner-placeholder {
+            color: #333;
+            font-size: 2rem;
+        }
+
+        .partner-body {
+            padding: 1.1rem 1.3rem 1.3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .partner-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #f0f0f0;
+            line-height: 1.3;
+        }
+
+        .partner-name.empty {
+            color: #3a3a3a;
+        }
+
+        .partner-desc {
+            font-size: 0.84rem;
+            color: #999;
+            line-height: 1.5;
+            min-height: 2.6em;
+        }
+
+        .partner-desc.empty {
+            color: #333;
+        }
+
+        .partner-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #ccc;
+            margin-top: 0.4rem;
+            padding-top: 0.7rem;
+            border-top: 1px solid #1e1e1e;
+            transition: color 0.2s ease;
+        }
+
+        .partner-link i {
+            font-size: 0.78rem;
+            transition: transform 0.25s ease;
+        }
+
+        .partner-link:hover {
+            color: #fff;
+        }
+
+        .partner-link:hover i {
+            transform: translateX(3px);
+        }
+
+        /* ── ГАЛЕРЕЯ (тетрис) ── */
+        .gallery-section {
+            padding: 1.5rem 5% 2rem;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #0a0a0a;
+            flex: 1;
+        }
+
+        .gallery-grid {
+            display: grid;
+            gap: 16px;
+            width: 100%;
+        }
+
+        .gallery-grid.pc {
+            grid-template-columns: repeat(6, 1fr);
+            grid-auto-rows: 200px;
+        }
+
+        .gallery-grid.pc .gallery-item:nth-child(1)  { grid-column: span 2; grid-row: span 2; }
+        .gallery-grid.pc .gallery-item:nth-child(2)  { grid-column: span 2; grid-row: span 1; }
+        .gallery-grid.pc .gallery-item:nth-child(3)  { grid-column: span 1; grid-row: span 2; }
+        .gallery-grid.pc .gallery-item:nth-child(4)  { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.pc .gallery-item:nth-child(5)  { grid-column: span 2; grid-row: span 2; }
+        .gallery-grid.pc .gallery-item:nth-child(6)  { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.pc .gallery-item:nth-child(7)  { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.pc .gallery-item:nth-child(8)  { grid-column: span 2; grid-row: span 1; }
+        .gallery-grid.pc .gallery-item:nth-child(9)  { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.pc .gallery-item:nth-child(10) { grid-column: span 2; grid-row: span 1; }
+        .gallery-grid.pc .gallery-item:nth-child(11) { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.pc .gallery-item:nth-child(12) { grid-column: span 2; grid-row: span 1; }
+        .gallery-grid.pc .gallery-item:nth-child(13) { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.pc .gallery-item:nth-child(14) { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.pc .gallery-item:nth-child(15) { grid-column: span 2; grid-row: span 1; }
+
+        .gallery-grid.mobile {
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 110px;
+            gap: 8px;
+        }
+
+        .gallery-grid.mobile .gallery-item:nth-child(1)  { grid-column: span 2; grid-row: span 2; }
+        .gallery-grid.mobile .gallery-item:nth-child(2)  { grid-column: span 2; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(3)  { grid-column: span 1; grid-row: span 2; }
+        .gallery-grid.mobile .gallery-item:nth-child(4)  { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(5)  { grid-column: span 2; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(6)  { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(7)  { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(8)  { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(9)  { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(10) { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(11) { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(12) { grid-column: span 2; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(13) { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(14) { grid-column: span 1; grid-row: span 1; }
+        .gallery-grid.mobile .gallery-item:nth-child(15) { grid-column: span 2; grid-row: span 1; }
+
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #1a1a1a;
+            display: block;
+
+            opacity: 0;
+            transform: translateY(30px) scale(0.96);
+            animation: galleryAppear 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes galleryAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 1rem 1rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item .gallery-overlay span {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        /* ── ПОДВАЛ ── */
+        footer {
+            background: #080808;
+            border-top: 1px solid #1a1a1a;
+            padding: 3rem 5% 2rem;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        .footer-col .footer-logo {
+            font-family: 'Nunito', 'Inter', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-col .footer-desc {
+            color: #777;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            max-width: 320px;
+        }
+
+        .footer-col .footer-title {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .footer-col .footer-links a {
+            font-size: 0.88rem;
+            color: #999;
+            transition: color 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .footer-col .footer-links a i {
+            font-size: 0.95rem;
+            color: #666;
+            transition: color 0.2s ease;
+            width: 1rem;
+        }
+
+        .footer-col .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-col .footer-links a:hover i {
+            color: #ccc;
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid #1a1a1a;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom .beta-footer {
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: #555;
+            text-transform: uppercase;
+        }
+
+        .footer-bottom .footer-copy {
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .gallery-grid.mobile {
+            display: none;
+        }
+
+        /* ── АДАПТИВ ── */
+        @media (max-width: 1200px) {
+            .gallery-grid.pc {
+                grid-template-columns: repeat(5, 1fr);
+                grid-auto-rows: 170px;
+            }
+            .gallery-grid.pc .gallery-item:nth-child(1)  { grid-column: span 2; grid-row: span 2; }
+            .gallery-grid.pc .gallery-item:nth-child(2)  { grid-column: span 2; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(3)  { grid-column: span 1; grid-row: span 2; }
+            .gallery-grid.pc .gallery-item:nth-child(4)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(5)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(6)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(7)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(8)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(9)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(10) { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(11) { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(12) { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(13) { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(14) { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(15) { grid-column: span 1; grid-row: span 1; }
+        }
+
+        @media (max-width: 992px) {
+            .gallery-grid.pc {
+                grid-template-columns: repeat(4, 1fr);
+                grid-auto-rows: 150px;
+            }
+            .gallery-grid.pc .gallery-item:nth-child(1)  { grid-column: span 2; grid-row: span 2; }
+            .gallery-grid.pc .gallery-item:nth-child(2)  { grid-column: span 2; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(3)  { grid-column: span 1; grid-row: span 2; }
+            .gallery-grid.pc .gallery-item:nth-child(4)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(5)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(6)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(7)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(8)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(9)  { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(10) { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(11) { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(12) { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(13) { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(14) { grid-column: span 1; grid-row: span 1; }
+            .gallery-grid.pc .gallery-item:nth-child(15) { grid-column: span 1; grid-row: span 1; }
+
+            .repos-grid,
+            .partners-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar .logo {
+                font-size: 1.5rem;
+            }
+            .navbar .beta-label {
+                font-size: 0.65rem;
+                margin-top: 0.3rem;
+            }
+            .info-block {
+                padding: 1.8rem 4% 0.8rem;
+            }
+            .info-block .social-links {
+                gap: 0.6rem;
+            }
+            .info-block .social-links .social-item {
+                min-width: 200px;
+                padding: 0.75rem 1rem;
+                gap: 0.7rem;
+            }
+            .info-block .social-links .social-item .social-icon {
+                width: 34px;
+                height: 34px;
+                border-radius: 9px;
+            }
+            .info-block .social-links .social-item .social-icon i {
+                font-size: 0.95rem;
+            }
+            .info-block .social-links .social-item .social-name {
+                font-size: 0.85rem;
+            }
+            .info-block .social-links .social-item .social-desc {
+                font-size: 0.7rem;
+            }
+
+            .section-head {
+                padding: 1.5rem 4% 0.4rem;
+            }
+            .section-head .toggle-btn {
+                font-size: 0.72rem;
+                padding: 0.3rem 0.75rem;
+            }
+
+            .collapsible-section.open {
+                padding: 1rem 4% 0.8rem;
+            }
+            .repos-grid,
+            .partners-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .gallery-section {
+                padding: 1rem 4% 1.2rem;
+            }
+            .gallery-grid.pc {
+                display: none;
+            }
+            .gallery-grid.mobile {
+                display: grid;
+            }
+
+            footer {
+                padding: 2.5rem 4% 1.5rem;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 1.8rem;
+            }
+            .footer-col .footer-desc {
+                max-width: 100%;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.6rem;
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar .logo {
+                font-size: 1.3rem;
+            }
+            .info-block {
+                padding: 1.5rem 4% 0.6rem;
+            }
+            .info-block .social-links {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .info-block .social-links .social-item {
+                min-width: auto;
+                width: 100%;
+            }
+            .gallery-grid.mobile {
+                grid-auto-rows: 90px;
+                gap: 5px;
+            }
+            .footer-col .footer-logo {
+                font-size: 1.4rem;
+            }
+            .footer-bottom .beta-footer {
+                font-size: 0.72rem;
+            }
+            .footer-bottom .footer-copy {
+                font-size: 0.72rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .info-block .social-links .social-item::before,
+            .repo-card::before,
+            .partner-card::before {
+                animation: none;
+            }
+            .gallery-item,
+            .repo-card,
+            .partner-card {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+            .collapsible-section {
+                transition: none;
+            }
+        }
+    </style>
 </head>
 <body>
-  <main>
-    <p class="status">● Сайт загружен</p>
-    <h1>Привет! 👋</h1>
-    <p>Это моя тестовая страница на GitHub Pages.</p>
-    <p>Время на устройстве: <strong id="clock"></strong></p>
-    <button id="test">Проверить JavaScript</button>
-    <p id="result">Ожидание проверки...</p>
-    <p>Адрес сайта: <code id="url"></code></p>
-    <p>Протокол: <strong id="protocol"></strong></p>
-  </main>
 
-  <script>
-    function updateClock() {
-      document.getElementById("clock").textContent =
-        new Date().toLocaleString("ru-RU");
-    }
+    <!-- ====== ШАПКА ====== -->
+    <nav class="navbar">
+        <div class="logo">khomink</div>
+        <div class="beta-label">beta</div>
+    </nav>
 
-    updateClock();
-    setInterval(updateClock, 1000);
+    <!-- ====== СОЦСЕТИ ====== -->
+    <div class="info-block">
+        <div class="social-links">
+            <a href="mailto:hello@khomink.ru" class="social-item">
+                <span class="social-icon"><i class="fas fa-envelope"></i></span>
+                <span class="social-text">
+                    <span class="social-name">Почта</span>
+                    <span class="social-desc">hello@khomink.ru</span>
+                </span>
+            </a>
+            <a href="https://github.com/DarkPenda" target="_blank" rel="noopener noreferrer" class="social-item">
+                <span class="social-icon"><i class="fab fa-github"></i></span>
+                <span class="social-text">
+                    <span class="social-name">GitHub</span>
+                    <span class="social-desc">DarkPenda</span>
+                </span>
+            </a>
+            <a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="social-item">
+                <span class="social-icon"><i class="fab fa-telegram"></i></span>
+                <span class="social-text">
+                    <span class="social-name">Telegram</span>
+                    <span class="social-desc">@</span>
+                </span>
+            </a>
+        </div>
+    </div>
 
-    document.getElementById("url").textContent =
-      window.location.host || "Локальный файл";
+    <!-- ====== РАЗДЕЛ: GITHUB РЕПОЗИТОРИИ (СВОРАЧИВАЕМЫЙ) ====== -->
+    <div class="section-head collapsible" id="reposHead">
+        <div class="head-row">
+            <h2 class="section-title">GitHub-репозитории</h2>
+            <span class="toggle-btn">
+                <span class="toggle-text">Развернуть</span>
+                <i class="fas fa-chevron-down"></i>
+            </span>
+        </div>
+        <p class="section-desc">Мои открытые проекты: код, эксперименты и инструменты, которые можно посмотреть и забрать</p>
+    </div>
 
-    document.getElementById("protocol").textContent =
-      window.location.protocol === "https:"
-        ? "HTTPS — защищённое соединение 🔒"
-        : "HTTP или локальный файл";
+    <div class="collapsible-section" id="reposSection">
+        <div class="repos-grid" id="reposGrid"></div>
+    </div>
 
-    document.getElementById("test").addEventListener("click", () => {
-      document.getElementById("result").textContent =
-        "JavaScript работает! Всё отлично ✅";
-    });
-  </script>
+    <!-- ====== РАЗДЕЛ: ИЗБРАННЫЕ ПРОЕКТЫ ====== -->
+    <div class="section-head">
+        <h2 class="section-title">Избранные проекты</h2>
+        <p class="section-desc">Карточки, которые вдохновляют делать 3D-модели</p>
+    </div>
+
+    <!-- ====== ГАЛЕРЕЯ (тетрис) ====== -->
+    <div class="gallery-section">
+        <div class="gallery-grid pc" id="heroGalleryPC"></div>
+        <div class="gallery-grid mobile" id="heroGalleryMobile"></div>
+    </div>
+
+    <!-- ====== РАЗДЕЛ: ПАРТНЁРЫ (СВОРАЧИВАЕМЫЙ) ====== -->
+    <div class="section-head collapsible" id="partnersHead">
+        <div class="head-row">
+            <h2 class="section-title">Партнёры</h2>
+            <span class="toggle-btn">
+                <span class="toggle-text">Развернуть</span>
+                <i class="fas fa-chevron-down"></i>
+            </span>
+        </div>
+        <p class="section-desc">Проекты и команды, с которыми я сотрудничаю</p>
+    </div>
+
+    <div class="collapsible-section" id="partnersSection">
+        <div class="partners-grid" id="partnersGrid"></div>
+    </div>
+
+    <!-- ====== ПОДВАЛ ====== -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo">khomink</div>
+                <div class="footer-desc">
+                    3D-моделирование, разработка и визуализация. Создаю инженерные модели, игровых персонажей, интерьеры и веб-приложения.
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <div class="footer-title">Навигация</div>
+                <div class="footer-links">
+                    <a href="#top" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;"><i class="fas fa-home"></i> Главная</a>
+                    <a href="#gallery" onclick="document.querySelector('.gallery-section').scrollIntoView({behavior:'smooth'}); return false;"><i class="fas fa-cube"></i> Моделирование</a>
+                    <a href="#gallery" onclick="document.querySelector('.gallery-section').scrollIntoView({behavior:'smooth'}); return false;"><i class="fas fa-code"></i> Программирование</a>
+                    <a href="#gallery" onclick="document.querySelector('.gallery-section').scrollIntoView({behavior:'smooth'}); return false;"><i class="fas fa-newspaper"></i> Обновления</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <div class="footer-title">Контакты</div>
+                <div class="footer-links">
+                    <a href="mailto:hello@khomink.ru"><i class="fas fa-envelope"></i> hello@khomink.ru</a>
+                    <a href="https://github.com/DarkPenda" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> DarkPenda</a>
+                    <a href="https://t.me/" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> @</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="beta-footer">BETA режим</div>
+            <div class="footer-copy">&copy; 2026 khomink.ru</div>
+        </div>
+    </footer>
+
+    <!-- ====== JS ====== -->
+    <script>
+        // ── РЕПОЗИТОРИИ GITHUB (ПУСТЫЕ ЗАГОТОВКИ) ──
+        const reposData = [
+            { name: "", desc: "", lang: "", langClass: "other", stars: "", forks: "", visibility: "public", updated: "", url: "https://github.com/DarkPenda" },
+            { name: "", desc: "", lang: "", langClass: "other", stars: "", forks: "", visibility: "public", updated: "", url: "https://github.com/DarkPenda" },
+            { name: "", desc: "", lang: "", langClass: "other", stars: "", forks: "", visibility: "public", updated: "", url: "https://github.com/DarkPenda" }
+        ];
+
+        // ── ПАРТНЁРЫ (ПУСТЫЕ ЗАГОТОВКИ) ──
+        const partnersData = [
+            { name: "", desc: "", img: "", url: "#" },
+            { name: "", desc: "", img: "", url: "#" },
+            { name: "", desc: "", img: "", url: "#" }
+        ];
+
+        // ── РЕНДЕР РЕПОЗИТОРИЕВ ──
+        function renderRepos() {
+            const grid = document.getElementById('reposGrid');
+            grid.innerHTML = reposData.map((r, i) => {
+                const nameEmpty = !r.name;
+                const descEmpty = !r.desc;
+                const langEmpty = !r.lang;
+                const starsEmpty = r.stars === "" || r.stars === undefined;
+                const forksEmpty = r.forks === "" || r.forks === undefined;
+                const updatedEmpty = !r.updated;
+
+                return `
+                <a class="repo-card" href="${r.url}" target="_blank" rel="noopener noreferrer" style="animation-delay: ${i * 0.08}s;">
+                    <div class="repo-top">
+                        <div class="repo-name-wrap">
+                            <span class="repo-icon"><i class="fas fa-book"></i></span>
+                            <span class="repo-name ${nameEmpty ? 'empty' : ''}">${nameEmpty ? '—' : r.name}</span>
+                        </div>
+                        <span class="repo-visibility">${r.visibility}</span>
+                    </div>
+
+                    <p class="repo-desc ${descEmpty ? 'empty' : ''}">${descEmpty ? 'Описание пока не добавлено' : r.desc}</p>
+
+                    <div class="repo-meta">
+                        <span class="meta-item ${langEmpty ? 'empty' : ''}">
+                            <span class="lang-dot ${r.langClass}"></span> ${langEmpty ? '—' : r.lang}
+                        </span>
+                        <span class="meta-item ${starsEmpty ? 'empty' : ''}">
+                            <i class="fas fa-star"></i> ${starsEmpty ? '—' : r.stars}
+                        </span>
+                        <span class="meta-item ${forksEmpty ? 'empty' : ''}">
+                            <i class="fas fa-code-branch"></i> ${forksEmpty ? '—' : r.forks}
+                        </span>
+                    </div>
+
+                    <div class="repo-footer">
+                        <span class="repo-link">
+                            Открыть <i class="fas fa-arrow-right"></i>
+                        </span>
+                        <span class="repo-updated ${updatedEmpty ? 'empty' : ''}">${updatedEmpty ? '—' : r.updated}</span>
+                    </div>
+                </a>
+                `;
+            }).join('');
+        }
+
+        // ── РЕНДЕР ПАРТНЁРОВ ──
+        function renderPartners() {
+            const grid = document.getElementById('partnersGrid');
+            grid.innerHTML = partnersData.map((p, i) => {
+                const nameEmpty = !p.name;
+                const descEmpty = !p.desc;
+                const imgEmpty = !p.img;
+
+                return `
+                <a class="partner-card" href="${p.url}" target="_blank" rel="noopener noreferrer" style="animation-delay: ${i * 0.08}s;">
+                    <div class="partner-img">
+                        ${imgEmpty ? '<span class="partner-placeholder"><i class="fas fa-image"></i></span>' : `<img src="${p.img}" alt="${p.name}" loading="lazy" />`}
+                    </div>
+                    <div class="partner-body">
+                        <div class="partner-name ${nameEmpty ? 'empty' : ''}">${nameEmpty ? 'Название проекта' : p.name}</div>
+                        <p class="partner-desc ${descEmpty ? 'empty' : ''}">${descEmpty ? 'Описание пока не добавлено' : p.desc}</p>
+                        <span class="partner-link">
+                            Подробнее <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </a>
+                `;
+            }).join('');
+        }
+
+        // ── ДАННЫЕ ДЛЯ ГАЛЕРЕИ ──
+        const galleryItems = [
+            { img: "https://i.pinimg.com/736x/04/84/22/048422cb4fc99682b05815edb0adbd6c.jpg", label: "3D моделирование" },
+            { img: "https://i.pinimg.com/1200x/d3/de/79/d3de794f2c3e14d6fbf28ffe77fbae88.jpg", label: "Веб разработка" },
+            { img: "https://i.pinimg.com/1200x/cc/7e/8a/cc7e8afc14d6c802f02c36b1057cd972.jpg", label: "Игровые персонажи" },
+            { img: "https://i.pinimg.com/736x/43/87/d6/4387d6f5e8a4b6e571fcb65b29e888e0.jpg", label: "Мобильные приложения" },
+            { img: "https://i.pinimg.com/736x/1d/7f/07/1d7f07e393adad10b08c047f51fb9568.jpg", label: "Инженерные модели" },
+            { img: "https://i.pinimg.com/1200x/c4/bc/15/c4bc15b4d5ff970177c0bc702cf99144.jpg", label: "Архитектура" },
+            { img: "https://i.pinimg.com/1200x/de/60/4e/de604e262ee6f01965b0caf78d65399e.jpg", label: "UI/UX дизайн" },
+            { img: "https://i.pinimg.com/1200x/e2/07/77/e20777eef874acfe09be06b3bdf60d51.jpg", label: "3D персонажи" },
+            { img: "https://i.pinimg.com/736x/a3/cf/03/a3cf031312bf325b6feec179d4a2393c.jpg", label: "Приложения" },
+            { img: "https://i.pinimg.com/736x/6b/35/45/6b35459712af0e0737c6e18f451d2b66.jpg", label: "Инженерия" },
+            { img: "https://i.pinimg.com/736x/04/84/22/048422cb4fc99682b05815edb0adbd6c.jpg", label: "Арт" },
+            { img: "https://i.pinimg.com/1200x/d3/de/79/d3de794f2c3e14d6fbf28ffe77fbae88.jpg", label: "Дизайн" },
+            { img: "https://i.pinimg.com/1200x/cc/7e/8a/cc7e8afc14d6c802f02c36b1057cd972.jpg", label: "3D сцена" },
+            { img: "https://i.pinimg.com/736x/43/87/d6/4387d6f5e8a4b6e571fcb65b29e888e0.jpg", label: "Мобильное" },
+            { img: "https://i.pinimg.com/736x/1d/7f/07/1d7f07e393adad10b08c047f51fb9568.jpg", label: "Инженерия" }
+        ];
+
+        // ── РЕНДЕР ГАЛЕРЕИ ──
+        function renderGallery() {
+            const pcGrid = document.getElementById('heroGalleryPC');
+            const mobileGrid = document.getElementById('heroGalleryMobile');
+
+            const buildHTML = () => galleryItems.map((item, i) => `
+                <a class="gallery-item" href="${item.img}" target="_blank" rel="noopener noreferrer" style="animation-delay: ${i * 0.06}s;">
+                    <img src="${item.img}" alt="${item.label}" loading="lazy" />
+                    <div class="gallery-overlay">
+                        <span>${item.label}</span>
+                    </div>
+                </a>
+            `).join('');
+
+            pcGrid.innerHTML = buildHTML();
+            mobileGrid.innerHTML = buildHTML();
+        }
+
+        // ── СВОРАЧИВАНИЕ / РАЗВОРАЧИВАНИЕ СЕКЦИЙ ──
+        function initCollapsible(headId, sectionId) {
+            const head = document.getElementById(headId);
+            const section = document.getElementById(sectionId);
+            if (!head || !section) return;
+            const toggleText = head.querySelector('.toggle-text');
+
+            head.addEventListener('click', () => {
+                const isOpen = section.classList.toggle('open');
+                head.classList.toggle('open', isOpen);
+                toggleText.textContent = isOpen ? 'Свернуть' : 'Развернуть';
+            });
+        }
+
+        // ── ИНИЦИАЛИЗАЦИЯ ──
+        renderRepos();
+        renderPartners();
+        renderGallery();
+        initCollapsible('reposHead', 'reposSection');
+        initCollapsible('partnersHead', 'partnersSection');
+    </script>
+
 </body>
 </html>
