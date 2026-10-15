@@ -45,7 +45,7 @@
             position: sticky;
             top: 0;
             width: 100%;
-            padding: 1.2rem 5%;
+            padding: 1rem 5% 0.8rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -77,9 +77,38 @@
             text-align: center;
         }
 
+        /* ── МЕНЮ РАЗДЕЛОВ ── */
+        .navbar .nav-menu {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .navbar .nav-menu a {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+            color: #a0a0a0;
+            padding: 0.5rem 1.15rem;
+            border-radius: 30px;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .navbar .nav-menu a:hover {
+            color: #ffffff;
+            background: #1c1c1c;
+            border-color: #333;
+            transform: translateY(-1px);
+        }
+
         /* ── СОЦСЕТИ ── */
         .info-block {
-            padding: 3rem 5% 1.5rem;
+            padding: 2.2rem 5% 1.5rem;
             max-width: 1400px;
             margin: 0 auto;
             width: 100%;
@@ -203,6 +232,7 @@
             width: 100%;
             padding: 2.5rem 5% 0.5rem;
             text-align: left;
+            scroll-margin-top: 140px;
         }
 
         .section-head .section-title {
@@ -270,7 +300,7 @@
             transform: rotate(180deg);
         }
 
-        /* ── СВОРАЧИВАЕМЫЕ СЕКЦИИ (общее) ── */
+        /* ── СВОРАЧИВАЕМЫЕ СЕКЦИИ ── */
         .collapsible-section {
             max-width: 1400px;
             margin: 0 auto;
@@ -288,7 +318,7 @@
         }
 
         .collapsible-section.open {
-            max-height: 1400px;
+            max-height: 1600px;
             opacity: 1;
             padding: 1.2rem 5% 1rem;
         }
@@ -519,6 +549,83 @@
             color: #333;
         }
 
+        /* ── ПАПКИ (Яндекс.Диск, пастельные, крупные) ── */
+        .folders-grid {
+            display: flex;
+            justify-content: center;
+            gap: 3.5rem;
+            flex-wrap: wrap;
+            padding: 1.5rem 0 1rem;
+        }
+
+        .folder-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.9rem;
+            text-align: center;
+            transition: transform 0.25s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: repoAppear 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .collapsible-section:not(.open) .folder-item {
+            animation: none;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .folder-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .folder-icon {
+            font-size: 6rem;
+            line-height: 1;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.4));
+        }
+
+        .folder-item:hover .folder-icon {
+            transform: scale(1.07) rotate(-2deg);
+        }
+
+        .folder-name {
+            font-family: 'Nunito', 'Inter', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #f0f0f0;
+            letter-spacing: -0.3px;
+        }
+
+        .folder-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #777;
+            transition: color 0.2s ease;
+        }
+
+        .folder-hint i {
+            font-size: 0.72rem;
+            transition: transform 0.25s ease;
+        }
+
+        .folder-item:hover .folder-hint {
+            color: #ccc;
+        }
+
+        .folder-item:hover .folder-hint i {
+            transform: translateX(4px);
+        }
+
+        .folder-item.folder-blue .folder-icon   { color: #a8c8e8; }
+        .folder-item.folder-pink .folder-icon   { color: #e8b8c8; }
+        .folder-item.folder-purple .folder-icon { color: #c8b8e8; }
+
         /* ── ПАРТНЁРЫ ── */
         .partners-grid {
             display: grid;
@@ -535,7 +642,7 @@
             border-radius: 16px;
             overflow: hidden;
             isolation: isolate;
-            transition: all 0.25s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
             opacity: 0;
             transform: translateY(20px);
             animation: repoAppear 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -941,12 +1048,23 @@
         }
 
         @media (max-width: 768px) {
+            .navbar {
+                padding: 0.9rem 4% 0.7rem;
+            }
             .navbar .logo {
                 font-size: 1.5rem;
             }
             .navbar .beta-label {
                 font-size: 0.65rem;
                 margin-top: 0.3rem;
+            }
+            .navbar .nav-menu {
+                gap: 0.35rem;
+                margin-top: 0.8rem;
+            }
+            .navbar .nav-menu a {
+                font-size: 0.82rem;
+                padding: 0.42rem 0.9rem;
             }
             .info-block {
                 padding: 1.8rem 4% 0.8rem;
@@ -976,6 +1094,7 @@
 
             .section-head {
                 padding: 1.5rem 4% 0.4rem;
+                scroll-margin-top: 180px;
             }
             .section-head .toggle-btn {
                 font-size: 0.72rem;
@@ -989,6 +1108,16 @@
             .partners-grid {
                 grid-template-columns: 1fr;
                 gap: 0.8rem;
+            }
+
+            .folders-grid {
+                gap: 2.5rem;
+            }
+            .folder-icon {
+                font-size: 4.5rem;
+            }
+            .folder-name {
+                font-size: 1.2rem;
             }
 
             .gallery-section {
@@ -1023,6 +1152,13 @@
             .navbar .logo {
                 font-size: 1.3rem;
             }
+            .navbar .nav-menu {
+                gap: 0.3rem;
+            }
+            .navbar .nav-menu a {
+                font-size: 0.76rem;
+                padding: 0.38rem 0.75rem;
+            }
             .info-block {
                 padding: 1.5rem 4% 0.6rem;
             }
@@ -1037,6 +1173,18 @@
             .gallery-grid.mobile {
                 grid-auto-rows: 90px;
                 gap: 5px;
+            }
+            .folders-grid {
+                gap: 2rem;
+            }
+            .folder-icon {
+                font-size: 3.8rem;
+            }
+            .folder-name {
+                font-size: 1.1rem;
+            }
+            .folder-hint {
+                font-size: 0.74rem;
             }
             .footer-col .footer-logo {
                 font-size: 1.4rem;
@@ -1057,6 +1205,7 @@
             }
             .gallery-item,
             .repo-card,
+            .folder-item,
             .partner-card {
                 animation: none;
                 opacity: 1;
@@ -1074,6 +1223,13 @@
     <nav class="navbar">
         <div class="logo">khomink</div>
         <div class="beta-label">beta</div>
+        <div class="nav-menu">
+            <a href="#top" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Главная</a>
+            <a href="#reposHead" onclick="document.getElementById('reposHead').scrollIntoView({behavior:'smooth'}); return false;">Репозитории</a>
+            <a href="#foldersHead" onclick="document.getElementById('foldersHead').scrollIntoView({behavior:'smooth'}); return false;">Папки</a>
+            <a href="#galleryTop" onclick="document.querySelector('.gallery-section').scrollIntoView({behavior:'smooth'}); return false;">Проекты</a>
+            <a href="#partnersHead" onclick="document.getElementById('partnersHead').scrollIntoView({behavior:'smooth'}); return false;">Партнёры</a>
+        </div>
     </nav>
 
     <!-- ====== СОЦСЕТИ ====== -->
@@ -1093,17 +1249,17 @@
                     <span class="social-desc">DarkPenda</span>
                 </span>
             </a>
-            <a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="social-item">
+            <a href="https://t.me/khkir" target="_blank" rel="noopener noreferrer" class="social-item">
                 <span class="social-icon"><i class="fab fa-telegram"></i></span>
                 <span class="social-text">
                     <span class="social-name">Telegram</span>
-                    <span class="social-desc">@</span>
+                    <span class="social-desc">@khkir</span>
                 </span>
             </a>
         </div>
     </div>
 
-    <!-- ====== РАЗДЕЛ: GITHUB РЕПОЗИТОРИИ (СВОРАЧИВАЕМЫЙ) ====== -->
+    <!-- ====== РАЗДЕЛ: GITHUB РЕПОЗИТОРИИ ====== -->
     <div class="section-head collapsible" id="reposHead">
         <div class="head-row">
             <h2 class="section-title">GitHub-репозитории</h2>
@@ -1119,8 +1275,24 @@
         <div class="repos-grid" id="reposGrid"></div>
     </div>
 
+    <!-- ====== РАЗДЕЛ: ПАПКИ (Яндекс.Диск) ====== -->
+    <div class="section-head collapsible" id="foldersHead">
+        <div class="head-row">
+            <h2 class="section-title">Папки</h2>
+            <span class="toggle-btn">
+                <span class="toggle-text">Развернуть</span>
+                <i class="fas fa-chevron-down"></i>
+            </span>
+        </div>
+        <p class="section-desc">Общедоступные и частные материалы на Яндекс.Диске</p>
+    </div>
+
+    <div class="collapsible-section" id="foldersSection">
+        <div class="folders-grid" id="foldersGrid"></div>
+    </div>
+
     <!-- ====== РАЗДЕЛ: ИЗБРАННЫЕ ПРОЕКТЫ ====== -->
-    <div class="section-head">
+    <div class="section-head" id="galleryTop">
         <h2 class="section-title">Избранные проекты</h2>
         <p class="section-desc">Карточки, которые вдохновляют делать 3D-модели</p>
     </div>
@@ -1131,7 +1303,7 @@
         <div class="gallery-grid mobile" id="heroGalleryMobile"></div>
     </div>
 
-    <!-- ====== РАЗДЕЛ: ПАРТНЁРЫ (СВОРАЧИВАЕМЫЙ) ====== -->
+    <!-- ====== РАЗДЕЛ: ПАРТНЁРЫ ====== -->
     <div class="section-head collapsible" id="partnersHead">
         <div class="head-row">
             <h2 class="section-title">Партнёры</h2>
@@ -1161,9 +1333,9 @@
                 <div class="footer-title">Навигация</div>
                 <div class="footer-links">
                     <a href="#top" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;"><i class="fas fa-home"></i> Главная</a>
-                    <a href="#gallery" onclick="document.querySelector('.gallery-section').scrollIntoView({behavior:'smooth'}); return false;"><i class="fas fa-cube"></i> Моделирование</a>
-                    <a href="#gallery" onclick="document.querySelector('.gallery-section').scrollIntoView({behavior:'smooth'}); return false;"><i class="fas fa-code"></i> Программирование</a>
-                    <a href="#gallery" onclick="document.querySelector('.gallery-section').scrollIntoView({behavior:'smooth'}); return false;"><i class="fas fa-newspaper"></i> Обновления</a>
+                    <a href="#reposHead" onclick="document.getElementById('reposHead').scrollIntoView({behavior:'smooth'}); return false;"><i class="fab fa-github"></i> Репозитории</a>
+                    <a href="#foldersHead" onclick="document.getElementById('foldersHead').scrollIntoView({behavior:'smooth'}); return false;"><i class="fas fa-folder"></i> Папки</a>
+                    <a href="#partnersHead" onclick="document.getElementById('partnersHead').scrollIntoView({behavior:'smooth'}); return false;"><i class="fas fa-handshake"></i> Партнёры</a>
                 </div>
             </div>
 
@@ -1172,7 +1344,7 @@
                 <div class="footer-links">
                     <a href="mailto:hello@khomink.ru"><i class="fas fa-envelope"></i> hello@khomink.ru</a>
                     <a href="https://github.com/DarkPenda" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> DarkPenda</a>
-                    <a href="https://t.me/" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> @</a>
+                    <a href="https://t.me/khkir" target="_blank" rel="noopener noreferrer"><i class="fab fa-telegram"></i> @khkir</a>
                 </div>
             </div>
         </div>
@@ -1190,6 +1362,13 @@
             { name: "", desc: "", lang: "", langClass: "other", stars: "", forks: "", visibility: "public", updated: "", url: "https://github.com/DarkPenda" },
             { name: "", desc: "", lang: "", langClass: "other", stars: "", forks: "", visibility: "public", updated: "", url: "https://github.com/DarkPenda" },
             { name: "", desc: "", lang: "", langClass: "other", stars: "", forks: "", visibility: "public", updated: "", url: "https://github.com/DarkPenda" }
+        ];
+
+        // ── ПАПКИ (Яндекс.Диск) ──
+        const foldersData = [
+            { name: "Общая", url: "https://disk.yandex.ru/d/hMO5PAlNbZNr3w", color: "folder-blue" },
+            { name: "Фото", url: "https://disk.yandex.ru/d/11HqnXRGY37nPg", color: "folder-pink" },
+            { name: "TBTWM", url: "https://disk.yandex.ru/d/A7H6dDGRaZxshg", color: "folder-purple" }
         ];
 
         // ── ПАРТНЁРЫ (ПУСТЫЕ ЗАГОТОВКИ) ──
@@ -1243,6 +1422,20 @@
                 </a>
                 `;
             }).join('');
+        }
+
+        // ── РЕНДЕР ПАПОК ──
+        function renderFolders() {
+            const grid = document.getElementById('foldersGrid');
+            grid.innerHTML = foldersData.map((f, i) => `
+                <a class="folder-item ${f.color}" href="${f.url}" target="_blank" rel="noopener noreferrer" style="animation-delay: ${i * 0.1}s;">
+                    <span class="folder-icon"><i class="fas fa-folder"></i></span>
+                    <span class="folder-name">${f.name}</span>
+                    <span class="folder-hint">
+                        Открыть Яндекс.Диск <i class="fas fa-arrow-right"></i>
+                    </span>
+                </a>
+            `).join('');
         }
 
         // ── РЕНДЕР ПАРТНЁРОВ ──
@@ -1323,9 +1516,11 @@
 
         // ── ИНИЦИАЛИЗАЦИЯ ──
         renderRepos();
+        renderFolders();
         renderPartners();
         renderGallery();
         initCollapsible('reposHead', 'reposSection');
+        initCollapsible('foldersHead', 'foldersSection');
         initCollapsible('partnersHead', 'partnersSection');
     </script>
 
